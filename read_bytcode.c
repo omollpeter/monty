@@ -46,5 +46,6 @@ void read_bytecode(FILE *file, stack_t **stack)
 		}
 		instr[i].f(stack, line_number);
 		line_number += 1;
+		free_arr_str(args);
 	}
 }
