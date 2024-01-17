@@ -15,7 +15,7 @@ void read_bytecode(FILE *file, stack_t **stack)
 	int len, exists, i;
 	unsigned int line_number = 1;
 	instruction_t instr[] = {
-		{"push", push}, {"pall", pall}, {NULL, NULL}};
+		{"push", push}, {"pall", pall}, {"pint", pint}, {NULL, NULL}};
 		/* {"pint", pint}, {"pop", pop},
 		{"swap", swap}, {"add", add}, {"nop", nop}, {"sub", sub}, {"div", divide},
 		{"mul", mul}, {"#", hash}, {"pchar", pchar}, {"pstr", pstr},
@@ -41,7 +41,7 @@ void read_bytecode(FILE *file, stack_t **stack)
 		}
 		if (!exists)
 		{
-			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, args[0]);
+			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, buffer);
 			exit(EXIT_FAILURE);
 		}
 		instr[i].f(stack, line_number);
