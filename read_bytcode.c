@@ -17,9 +17,9 @@ void read_bytecode(FILE *file, stack_t **stack)
 	instruction_t instr[] = {
 		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop},
 		{"swap", swap}, {"add", add}, {"nop", nop}, {"sub", sub},
-		{"div", divide}, {"mul", mul}, {"mod", mod}, {NULL, NULL}};
+		{"div", divide}, {"mul", mul}, {"mod", mod}, {"#", hash},
+		{NULL, NULL}};
 		/* {"pint", pint}, {"pop", pop},
-		{"swap", swap}, {"add", add}, {"nop", nop}, {"sub", sub}, {"div", divide},
 		{"mul", mul}, {"#", hash}, {"pchar", pchar}, {"pstr", pstr},
 		{"rotl", rotl}, {"rotr", rotr}, {"stack", stack_st}, {"queue", queue},
 		{NULL, NULL}};
@@ -35,7 +35,7 @@ void read_bytecode(FILE *file, stack_t **stack)
 		args = parser(buffer, " ");
 		for (i = 0; instr[i].opcode; i++)
 		{
-			if (strcmp(args[0], instr[i].opcode) == 0)
+			if (strcmp(args[0], instr[i].opcode) == 0 || args[0][0] == '#')
 			{
 				exists = 1;
 				break;
@@ -46,7 +46,10 @@ void read_bytecode(FILE *file, stack_t **stack)
 			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, buffer);
 			exit(EXIT_FAILURE);
 		}
-		instr[i].f(stack, line_number);
+		if (args[0][0] == '#')
+			hash(stack, line_number);
+		else
+			instr[i].f(stack, line_number);
 		line_number += 1;
 		free_arr_str(args);
 	}
