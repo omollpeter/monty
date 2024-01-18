@@ -18,7 +18,7 @@ void read_bytecode(FILE *file, stack_t **stack)
 		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop},
 		{"swap", swap}, {"add", add}, {"nop", nop}, {"sub", sub},
 		{"div", divide}, {"mul", mul}, {"mod", mod}, {"#", hash},
-		{"pchar", pchar}, {NULL, NULL}};
+		{"pchar", pchar}, {"pstr", pstr}, {NULL, NULL}};
 		/* {"pint", pint}, {"pop", pop},
 		{"mul", mul}, {"#", hash}, {"pchar", pchar}, {"pstr", pstr},
 		{"rotl", rotl}, {"rotr", rotr}, {"stack", stack_st}, {"queue", queue},
