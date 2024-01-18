@@ -16,7 +16,8 @@ void read_bytecode(FILE *file, stack_t **stack)
 	unsigned int line_number = 1;
 	instruction_t instr[] = {
 		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop},
-		{"swap", swap}, {"add", add}, {"nop", nop}, {NULL, NULL}};
+		{"swap", swap}, {"add", add}, {"nop", nop}, {"sub", sub},
+		{NULL, NULL}};
 		/* {"pint", pint}, {"pop", pop},
 		{"swap", swap}, {"add", add}, {"nop", nop}, {"sub", sub}, {"div", divide},
 		{"mul", mul}, {"#", hash}, {"pchar", pchar}, {"pstr", pstr},
