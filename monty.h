@@ -65,7 +65,7 @@ void stack_st(stack_t **stack, unsigned int line_number);
 void queue(stack_t **stack, unsigned int line_number);
 */
 void check_int_arg(unsigned int line_number, char *arg);
-void push_stack(stack_t **stack, unsigned int line_number, char *arg);
+stack_t *push_stack(stack_t **stack, unsigned int line_number, char *arg);
 void push_queue(stack_t **stack, unsigned int line_number, char *arg);
 
 #endif /* MONTY_H */

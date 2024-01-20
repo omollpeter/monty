@@ -1,5 +1,4 @@
 #include "monty.h"
-
 /**
  * push - Adds a new node at the top of stack/ back of a queue
  * @stack: Pointer to pointer to the first node in the stack/queue
@@ -11,7 +10,7 @@ void push(stack_t **stack, unsigned int line_number)
 {
 	char *arg = args[1];
 
-	push_stack(stack, line_number, arg);
+	*stack = push_stack(stack, line_number, arg);
 }
 /**
  * check_int_arg - Checks if arg is an integer
@@ -48,9 +47,9 @@ void check_int_arg(unsigned int line_number, char *arg)
  * @line_number: Line number in the bytecode file that contains the opcode
  * @arg: Argument to push to stack/queue
  *
- * Return: void
+ * Return: a pointer to the top element in the stack
  */
-void push_stack(stack_t **stack, unsigned int line_number, char *arg)
+stack_t *push_stack(stack_t **stack, unsigned int line_number, char *arg)
 {
 	stack_t *new, *temp;
 
@@ -68,12 +67,6 @@ void push_stack(stack_t **stack, unsigned int line_number, char *arg)
 
 	if (*stack == NULL)
 	{
-		*stack = malloc(sizeof(stack_t));
-		if (*stack == NULL)
-		{
-			fprintf(stderr, "Error: malloc failed\n");
-			exit(EXIT_FAILURE);
-		}
 		*stack = new;
 	}
 	else
@@ -83,6 +76,7 @@ void push_stack(stack_t **stack, unsigned int line_number, char *arg)
 		(*stack)->next = temp;
 		temp->prev = *stack;
 	}
+	return (*stack);
 }
 /**
  * push_queue - Adds a new node at the top of stack/ back of a queue

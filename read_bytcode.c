@@ -30,9 +30,15 @@ void read_bytecode(FILE *file, stack_t **stack)
 		exists = 0;
 		len = (int) strlen(buffer);
 		if (buffer[len - 1] == '\n')
-			buffer[len - 1] = '\0';
+			buffer[len - 1] = ' ';
 
 		args = parser(buffer, " ");
+		if (args[0] == NULL)
+		{
+			free(args);
+			line_number += 1;
+			continue;
+		}
 		for (i = 0; instr[i].opcode; i++)
 		{
 			if (strcmp(args[0], instr[i].opcode) == 0 || args[0][0] == '#')
@@ -43,6 +49,9 @@ void read_bytecode(FILE *file, stack_t **stack)
 		}
 		if (!exists)
 		{
+			free_arr_str(args);
+			free_stack(*stack);
+			fclose(file);
 			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, buffer);
 			exit(EXIT_FAILURE);
 		}

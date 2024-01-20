@@ -26,7 +26,7 @@ int main(int ac, char **av)
 		exit(EXIT_FAILURE);
 	}
 	read_bytecode(file, &stack);
-	free(stack);
+	free_stack(stack);
 	fclose(file);
 	return (0);
 }
