@@ -1,6 +1,7 @@
 #include "monty.h"
 
 char **args = NULL;
+int s_tack = 1;
 
 /**
  * read_bytecode - Reads every line in a monty bytecode file
@@ -18,12 +19,8 @@ void read_bytecode(FILE *file, stack_t **stack)
 		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop},
 		{"swap", swap}, {"add", add}, {"nop", nop}, {"sub", sub},
 		{"div", divide}, {"mul", mul}, {"mod", mod}, {"#", hash},
-		{"pchar", pchar}, {"pstr", pstr}, {NULL, NULL}};
-		/* {"pint", pint}, {"pop", pop},
-		{"mul", mul}, {"#", hash}, {"pchar", pchar}, {"pstr", pstr},
-		{"rotl", rotl}, {"rotr", rotr}, {"stack", stack_st}, {"queue", queue},
-		{NULL, NULL}};
-		*/
+		{"pchar", pchar}, {"pstr", pstr}, {"rotl", rotl}, {"rotr", rotr},
+		{"stack", stack_st}, {"queue", queue}, {NULL, NULL}};
 
 	while (fgets(buffer, 511, file) != NULL)
 	{
@@ -31,7 +28,6 @@ void read_bytecode(FILE *file, stack_t **stack)
 		len = (int) strlen(buffer);
 		if (buffer[len - 1] == '\n')
 			buffer[len - 1] = ' ';
-
 		args = parser(buffer, " ");
 		if (args[0] == NULL)
 		{

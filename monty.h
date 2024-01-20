@@ -8,6 +8,7 @@
 #include <string.h>
 
 extern char **args;
+extern int s_tack;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -58,14 +59,12 @@ void mod(stack_t **stack, unsigned int line_number);
 void hash(stack_t **stack, unsigned int line_number);
 void pchar(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
-/*
 void rotl(stack_t **stack, unsigned int line_number);
 void rotr(stack_t **stack, unsigned int line_number);
 void stack_st(stack_t **stack, unsigned int line_number);
 void queue(stack_t **stack, unsigned int line_number);
-*/
 void check_int_arg(unsigned int line_number, char *arg);
 stack_t *push_stack(stack_t **stack, unsigned int line_number, char *arg);
-void push_queue(stack_t **stack, unsigned int line_number, char *arg);
+stack_t *push_queue(stack_t **stack, unsigned int line_number, char *arg);
 
 #endif /* MONTY_H */

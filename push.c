@@ -10,7 +10,10 @@ void push(stack_t **stack, unsigned int line_number)
 {
 	char *arg = args[1];
 
-	*stack = push_stack(stack, line_number, arg);
+	if (s_tack)
+		*stack = push_stack(stack, line_number, arg);
+	else
+		*stack = push_queue(stack, line_number, arg);
 }
 /**
  * check_int_arg - Checks if arg is an integer
@@ -84,9 +87,9 @@ stack_t *push_stack(stack_t **stack, unsigned int line_number, char *arg)
  * @line_number: Line number in the bytecode file that contains the opcode
  * @arg: Argument to push to stack/queue
  *
- * Return: void
+ * Return: a pointer to the top element in the stack
  */
-void push_queue(stack_t **stack, unsigned int line_number, char *arg)
+stack_t *push_queue(stack_t **stack, unsigned int line_number, char *arg)
 {
 	stack_t *new, *temp;
 
@@ -103,12 +106,6 @@ void push_queue(stack_t **stack, unsigned int line_number, char *arg)
 	new->prev = NULL;
 	if (*stack == NULL)
 	{
-		*stack = malloc(sizeof(stack_t));
-		if (*stack == NULL)
-		{
-			fprintf(stderr, "Error: malloc failed\n");
-			exit(EXIT_FAILURE);
-		}
 		*stack = new;
 	}
 	else
@@ -122,4 +119,5 @@ void push_queue(stack_t **stack, unsigned int line_number, char *arg)
 		temp->next = new;
 		new->prev = temp;
 	}
+	return (*stack);
 }
