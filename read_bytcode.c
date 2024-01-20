@@ -49,10 +49,10 @@ void read_bytecode(FILE *file, stack_t **stack)
 		}
 		if (!exists)
 		{
-			free_arr_str(args);
 			free_stack(*stack);
 			fclose(file);
-			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, buffer);
+			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, args[0]);
+			free_arr_str(args);
 			exit(EXIT_FAILURE);
 		}
 		if (args[0][0] == '#')
